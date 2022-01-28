@@ -16,7 +16,8 @@ Click on the "Configure" button.
 
 In the configuration form, you can which order statuses will generate automatics order slips.
 
-When you set an order to choosen statuses, and when this order already has an invoice, an order slip will automatically be generated.  
+When you set an order to choosen statuses, and when this order already has an invoice, an order slip will automatically be generated.
+
 This order slip will be for the full order (products, taxes, shipping, ...) and handles cart rules.
 
 ## Support

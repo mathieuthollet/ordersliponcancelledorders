@@ -12,9 +12,11 @@ Choose the file "ordersliponcancelledorders.zip" and click on "Upload this modul
 
 In admin, choose "Modules and services", and then look for the module "Order Slip On Cancelled Orders".
 
-That's all, no configuration needed !  
+Click on the "Configure" button.
 
-When you set an order to "Cancelled" state, and when this order already has an invoice, an order slip will automatically be generated.  
+In the configuration form, you can which order statuses will generate automatics order slips.
+
+When you set an order to choosen statuses, and when this order already has an invoice, an order slip will automatically be generated.  
 This order slip will be for the full order (products, taxes, shipping, ...) and handles cart rules.
 
 ## Support

@@ -1,6 +1,6 @@
 <?php
 /**
- * 2007-2021 PrestaShop
+ * 2007-2022 PrestaShop
  *
  * NOTICE OF LICENSE
  *
@@ -19,7 +19,7 @@
  * needs please refer to http://www.prestashop.com for more information.
  *
  * @author    PrestaShop SA <contact@prestashop.com>
- * @copyright 2007-2021 PrestaShop SA
+ * @copyright 2007-2022 PrestaShop SA
  * @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  *  International Registered Trademark & Property of PrestaShop SA
  */
@@ -39,7 +39,7 @@ class OrderSlipOnCancelledOrders extends Module
     {
         $this->name = 'ordersliponcancelledorders';
         $this->tab = 'administration';
-        $this->version = '1.0.2';
+        $this->version = '1.1.0';
         $this->author = 'AWebVision';
         $this->need_instance = 0;
         $this->bootstrap = true;
@@ -53,6 +53,7 @@ class OrderSlipOnCancelledOrders extends Module
 
     public function install()
     {
+        Configuration::updateValue('ORDERSLIPONCANCELLEDORDERS_IDS_ORDER_STATE', serialize([Configuration::get('PS_OS_CANCELED')]));
         return parent::install() && $this->registerHook('actionOrderStatusPostUpdate');
     }
 
@@ -67,11 +68,25 @@ class OrderSlipOnCancelledOrders extends Module
      */
     public function getContent()
     {
+        if ((bool)Tools::isSubmit('submitOrderSlipOnCancelledOrdersSettings')) {
+            $this->postProcess();
+        }
         $this->context->smarty->assign('module_dir', $this->_path);
         $this->context->smarty->assign('support_url', $this->support_url);
         $output = $this->message .
+            $this->renderSettingsForm() .
             $this->context->smarty->fetch($this->local_path . 'views/templates/admin/support.tpl');
         return $output;
+    }
+
+    /**
+     * PostProcess
+     */
+    protected function postProcess()
+    {
+        if (Tools::isSubmit('submitOrderSlipOnCancelledOrdersSettings')) {
+            $this->processSaveSettings();
+        }
     }
 
     /**
@@ -95,12 +110,93 @@ class OrderSlipOnCancelledOrders extends Module
     }
 
     /**
+     * Rendering of configuration form
+     * @return mixed
+     */
+    protected function renderSettingsForm()
+    {
+        $helper = new HelperForm();
+
+        $helper->show_toolbar = false;
+        $helper->module = $this;
+        $helper->default_form_language = $this->context->language->id;
+        $helper->allow_employee_form_lang = Configuration::get('PS_BO_ALLOW_EMPLOYEE_FORM_LANG', 0);
+
+        $helper->identifier = $this->identifier;
+        $helper->submit_action = 'submitOrderSlipOnCancelledOrdersSettings';
+        $helper->currentIndex = $this->context->link->getAdminLink('AdminModules', false)
+            . '&configure=' . $this->name . '&tab_module=' . $this->tab . '&module_name=' . $this->name;
+        $helper->token = Tools::getAdminTokenLite('AdminModules');
+
+        $helper->tpl_vars = [
+            'languages' => $this->context->controller->getLanguages(),
+            'id_language' => $this->context->language->id,
+        ];
+        // Form values
+        $idsOrderStates = unserialize(Configuration::get('ORDERSLIPONCANCELLEDORDERS_IDS_ORDER_STATE'));
+        if (is_array($idsOrderStates)) {
+            foreach ($idsOrderStates as $idsOrderState) {
+                $helper->fields_value['id_order_state_' . $idsOrderState] = 1;
+            }
+        }
+        return $helper->generateForm([$this->getSettingsForm()]);
+    }
+
+    /**
+     * Structure of the configuration form
+     * @return array
+     */
+    protected function getSettingsForm()
+    {
+        return [
+            'form' => [
+                'legend' => [
+                    'title' => $this->l('Order Slip On Cancelled Orders') . ' - ' . $this->l('Settings'),
+                    'icon' => 'icon-cogs',
+                ],
+                'input' => [
+                    [
+                        'type' => 'checkbox',
+                        'label' => $this->l('Order statuses'),
+                        'name' => 'id_order_state',
+                        'values' => [
+                            'query' => OrderState::getOrderStates($this->context->language->id),
+                            'id' => 'id_order_state',
+                            'name' => 'name'
+                        ],
+                    ],
+                ],
+                'submit' => [
+                    'title' => $this->l('Save settings'),
+                    'id' => 'submitSettings',
+                    'icon' => 'process-icon-save'
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * Save export settings
+     */
+    protected function processSaveSettings()
+    {
+        $idsOrderState = [];
+        foreach (OrderState::getOrderStates($this->context->language->id) as $order_state) {
+            if (Tools::getValue('id_order_state_' . $order_state['id_order_state'])) {
+                $idsOrderState[] = $order_state['id_order_state'];
+            }
+        }
+        Configuration::updateValue('ORDERSLIPONCANCELLEDORDERS_IDS_ORDER_STATE', serialize($idsOrderState));
+    }
+
+    /**
      * Generates order slip when an order is cancelled, and when this order already has an invoice
      * @param $params
      */
     public function hookActionOrderStatusPostUpdate($params)
     {
-        if ($params['newOrderStatus']->id == Configuration::get('PS_OS_CANCELED')) {
+        $idsOrderState = unserialize(Configuration::get('ORDERSLIPONCANCELLEDORDERS_IDS_ORDER_STATE'));
+        if (is_array($idsOrderState) && in_array($params['newOrderStatus']->id, $idsOrderState)) {
             $order = new Order($params['id_order']);
             if ($order->invoice_number != 0) {
                 $order_detail_list = [];

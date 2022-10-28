@@ -30,7 +30,7 @@ if (!defined('_PS_VERSION_')) {
 
 class OrderSlipOnCancelledOrders extends Module
 {
-    private $message = '';
+    public $message = '';
 
     protected $config_form = false;
     protected $support_url = 'https://addons.prestashop.com/fr/contactez-nous?id_product=49576';
@@ -39,7 +39,7 @@ class OrderSlipOnCancelledOrders extends Module
     {
         $this->name = 'ordersliponcancelledorders';
         $this->tab = 'administration';
-        $this->version = '1.1.0';
+        $this->version = '1.1.1';
         $this->author = 'AWebVision';
         $this->need_instance = 0;
         $this->bootstrap = true;

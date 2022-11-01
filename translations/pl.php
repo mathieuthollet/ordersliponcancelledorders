@@ -1,7 +1,7 @@
 <?php
 
 global $_MODULE;
-$_MODULE = array();
+$_MODULE = [];
 $_MODULE['<{ordersliponcancelledorders}prestashop>ordersliponcancelledorders_83d9c460ec01039d0adea16edefcbf4f'] = 'Anulowane zamówienia automatyczne poślizgowe';
 $_MODULE['<{ordersliponcancelledorders}prestashop>ordersliponcancelledorders_4f7e5cb3bb174543cc6a25dc32cebda4'] = 'Automatycznie generuje potwierdzenie zamówienia, kiedy ustawisz zamówienie na stan \"Anulowane \" i kiedy to zamówienie ma już fakturę.';
 $_MODULE['<{ordersliponcancelledorders}prestashop>ordersliponcancelledorders_f4f70727dc34561dfde1a3c529b6205c'] = 'Ustawienia';

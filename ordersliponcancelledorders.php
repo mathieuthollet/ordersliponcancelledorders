@@ -23,7 +23,6 @@
  * @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  *  International Registered Trademark & Property of PrestaShop SA
  */
-
 if (!defined('_PS_VERSION_')) {
     exit;
 }
@@ -62,13 +61,12 @@ class OrderSlipOnCancelledOrders extends Module
         return parent::uninstall();
     }
 
-
     /**
      * Load the configuration form
      */
     public function getContent()
     {
-        if ((bool)Tools::isSubmit('submitOrderSlipOnCancelledOrdersSettings')) {
+        if (Tools::isSubmit('submitOrderSlipOnCancelledOrdersSettings')) {
             $this->postProcess();
         }
         $this->context->smarty->assign('module_dir', $this->_path);
@@ -162,14 +160,14 @@ class OrderSlipOnCancelledOrders extends Module
                         'values' => [
                             'query' => OrderState::getOrderStates($this->context->language->id),
                             'id' => 'id_order_state',
-                            'name' => 'name'
+                            'name' => 'name',
                         ],
                     ],
                 ],
                 'submit' => [
                     'title' => $this->l('Save settings'),
                     'id' => 'submitSettings',
-                    'icon' => 'process-icon-save'
+                    'icon' => 'process-icon-save',
                 ],
             ],
         ];

@@ -1,7 +1,7 @@
 <?php
 
 global $_MODULE;
-$_MODULE = array();
+$_MODULE = [];
 $_MODULE['<{ordersliponcancelledorders}prestashop>ordersliponcancelledorders_83d9c460ec01039d0adea16edefcbf4f'] = 'Avoir automatique sur les commandes annulées';
 $_MODULE['<{ordersliponcancelledorders}prestashop>ordersliponcancelledorders_4f7e5cb3bb174543cc6a25dc32cebda4'] = 'Génère automatiquement un avoir lorsque vous définissez une commande à l’état \"Annulée\" et que cette commande a déjà une facture.';
 $_MODULE['<{ordersliponcancelledorders}prestashop>ordersliponcancelledorders_f4f70727dc34561dfde1a3c529b6205c'] = 'Paramètres';

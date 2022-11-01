@@ -1,7 +1,7 @@
 <?php
 
 global $_MODULE;
-$_MODULE = array();
+$_MODULE = [];
 $_MODULE['<{ordersliponcancelledorders}prestashop>ordersliponcancelledorders_83d9c460ec01039d0adea16edefcbf4f'] = 'Automatischer Bestellschein stornierten Bestellungen';
 $_MODULE['<{ordersliponcancelledorders}prestashop>ordersliponcancelledorders_4f7e5cb3bb174543cc6a25dc32cebda4'] = 'Erzeugt automatisch einen Bestellschein, wenn Sie eine Bestellung auf den Status \"Storniert\" setzen und wenn diese Bestellung bereits eine Rechnung hat.';
 $_MODULE['<{ordersliponcancelledorders}prestashop>ordersliponcancelledorders_f4f70727dc34561dfde1a3c529b6205c'] = 'Einstellungen';

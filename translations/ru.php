@@ -1,9 +1,9 @@
 <?php
 
 global $_MODULE;
-$_MODULE = array();
+$_MODULE = [];
 $_MODULE['<{ordersliponcancelledorders}prestashop>ordersliponcancelledorders_83d9c460ec01039d0adea16edefcbf4f'] = 'Автоматическое проскальзывание при отмене заказов';
-$_MODULE['<{ordersliponcancelledorders}prestashop>ordersliponcancelledorders_4f7e5cb3bb174543cc6a25dc32cebda4'] = 'Автоматически генерирует квитанцию ​​заказа, когда вы устанавливаете заказ в состояние \"Отменен\", и когда этот заказ уже имеет счет-фактуру.';
+$_MODULE['<{ordersliponcancelledorders}prestashop>ordersliponcancelledorders_4f7e5cb3bb174543cc6a25dc32cebda4'] = 'Автоматически генерирует квитанцию заказа, когда вы устанавливаете заказ в состояние \"Отменен\", и когда этот заказ уже имеет счет-фактуру.';
 $_MODULE['<{ordersliponcancelledorders}prestashop>ordersliponcancelledorders_f4f70727dc34561dfde1a3c529b6205c'] = 'Настройки';
 $_MODULE['<{ordersliponcancelledorders}prestashop>ordersliponcancelledorders_33af8066d3c83110d4bd897f687cedd2'] = 'Статусы заказов';
 $_MODULE['<{ordersliponcancelledorders}prestashop>ordersliponcancelledorders_d4dccb8ca2dac4e53c01bd9954755332'] = 'Сохранить настройки';

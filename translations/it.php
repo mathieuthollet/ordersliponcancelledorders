@@ -1,7 +1,7 @@
 <?php
 
 global $_MODULE;
-$_MODULE = array();
+$_MODULE = [];
 $_MODULE['<{ordersliponcancelledorders}prestashop>ordersliponcancelledorders_83d9c460ec01039d0adea16edefcbf4f'] = 'Slip ordine automatico su ordini annullati';
 $_MODULE['<{ordersliponcancelledorders}prestashop>ordersliponcancelledorders_4f7e5cb3bb174543cc6a25dc32cebda4'] = 'Genera automaticamente una ricevuta d\'ordine quando imposti un ordine allo stato \"Annullato\" e quando questo ordine ha già una fattura.';
 $_MODULE['<{ordersliponcancelledorders}prestashop>ordersliponcancelledorders_f4f70727dc34561dfde1a3c529b6205c'] = 'Impostazioni';

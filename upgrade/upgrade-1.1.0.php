@@ -23,7 +23,6 @@
  * @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  *  International Registered Trademark & Property of PrestaShop SA
  */
-
 function upgrade_module_1_1_0($module)
 {
     Configuration::updateValue('ORDERSLIPONCANCELLEDORDERS_IDS_ORDER_STATE', serialize([Configuration::get('PS_OS_CANCELED')]));
